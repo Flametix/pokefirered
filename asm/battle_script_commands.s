@@ -8374,8 +8374,6 @@ sub_8021A68: @ 8021A68
 	mov r8, r1
 	ldr r0, _08021AC0 @ =gBattleScripting
 	ldrb r0, [r0, 0x1C]
-	cmp r0, 0x6
-	bls _08021AA4
 	bl _080223DA
 _08021AA4:
 	lsls r0, 2
