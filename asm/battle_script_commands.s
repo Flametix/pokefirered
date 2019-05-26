@@ -8374,6 +8374,8 @@ sub_8021A68: @ 8021A68
 	mov r8, r1
 	ldr r0, _08021AC0 @ =gBattleScripting
 	ldrb r0, [r0, 0x1C]
+	cmp r0, 0x6
+	bls _08021AA4
 	bl _080223DA
 _08021AA4:
 	lsls r0, 2
@@ -8409,7 +8411,7 @@ _08021AE4:
 _08021AF8:
 	ldr r0, _08021B38 @ =gBattleTypeFlags
 	ldr r0, [r0]
-	ldr r1, _08021B3C @ =0x00080982
+	ldr r1, _08021B3C @ =0xFFffffffuck you 0 exp
 	ands r0, r1
 	cmp r0, 0
 	beq _08021B08
@@ -8438,7 +8440,7 @@ _08021B08:
 	.align 2, 0
 _08021B34: .4byte gUnknown_2023D6D
 _08021B38: .4byte gBattleTypeFlags
-_08021B3C: .4byte 0x00080982
+_08021B3C: .4byte 0xFFFFFFFF
 _08021B40: .4byte gBattleScripting
 _08021B44: .4byte gBattleStruct
 _08021B48: .4byte gBitTable
