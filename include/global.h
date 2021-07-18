@@ -45,14 +45,40 @@
 // Converts a number to Q8.8 fixed-point format
 #define Q_8_8(n) ((s16)((n) * 256))
 
+// Converts a number from Q8.8 fixed-point format
+#define Q_8_8_TO_INT(n) ((s16)((n) >> 8))
+
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((s16)((n) * 4096))
+
+// Converts a number from Q4.12 fixed-point format
+#define Q_4_12_TO_INT(n) ((s16)((n) >> 12))
+
+// Converts a number to QN.S fixed-point format (16-bits)
+#define Q_N_S(s, n) ((s16)((n) * (1 << (s))))
+
+// converts a number from QN.S fixed-point format (16-bits)
+#define Q_N_S_TO_INT(s, n) ((s16)((n) >> (s)))
+
+// Converts a number to Q24.8 fixed-point format
+#define Q_24_8(n) ((s32)((n) << 8))
+
+// Converts a number from Q24.8 fixed-point format
+#define Q_24_8_TO_INT(n) ((s32)((n) >> 8))
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
 #if MODERN
 #define abs(x) (((x) < 0) ? -(x) : (x))
+#endif
+
+// Used in cases where division by 0 can occur in the retail version.
+// Avoids invalid opcodes on some emulators, and the otherwise UB.
+#ifdef UBFIX
+#define SAFE_DIV(a, b) ((b) ? (a) / (b) : 0)
+#else
+#define SAFE_DIV(a, b) ((a) / (b))
 #endif
 
 // There are many quirks in the source code which have overarching behavioral differences from
